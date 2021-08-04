@@ -1,0 +1,1319 @@
+﻿<krpano version="1.20.9" title="Virtual Tour">
+
+	<contextmenu fullscreen="false" native="false" versioninfo="false" >
+		
+	</contextmenu>
+    <include url="popwindow.xml"/>
+    <include url="poster.xml"/>
+    <plugin name="options" url="plugins/options.swf" keep="true" />
+   
+    <!-- <include url="hotspots.xml"/> -->
+    <action name="hotspot_animate">
+     inc(frame,1,get(lastframe),0);
+     mul(ypos,frame,frameheight);
+     txtadd(crop,'0|',get(ypos),'|',get(framewidth),'|',get(frameheight));
+     if(frameoff LT 1,
+     delayedcall(get(framespeed), if(loaded, hotspot_animate() ) );
+     );
+     </action>
+	 <action name="popupEvent" scope="private:POPUP"
+		args="type, content, width, height, scrollbars,eventName">
+		
+		js(ActionEventB(%6));
+		popup(%1, %2, %3, %4, %45);
+	</action>
+	 <action name="imagePosterEvent" scope="private:POPUP"
+		args="eventName,posterOrder">
+		js(ActionEventB(%1));
+		set(layer[posterbg].visible,true);
+		set(layer[poster1].visible,true);
+	</action>
+     <style name="hotspotname" scale="1" url="plugins/textfield.swf"  padding = "7" backgroundcolor="#000000" backgroundalpha="0.5" roundedge="3" css="font-family:微软雅黑; font-size:20px; color:#ffffff;letter-spacing:1px;" edge="top" oy ="-50" />
+
+<style name="hotspotname" devices="mobile" scale.mobile="0.8" css="font-family:微软雅黑; font-size:15px; color:#ffffff;letter-spacing:1px;" oy ="-40" />
+
+<action name="showtxt_action">
+ if(view.vlookat LT -80 OR view.vlookat GT +80,
+		delayedcall(1.5,
+				if(lp_scene === xml.scene,					
+					tween(view.hlookat|view.vlookat|view.fov|view.distortion, calc('' + lp_hlookat + '|' + lp_vlookat + '|' + lp_fov + '|' + 0.0),
+						2.0, easeOutQuad,
+						set(control.usercontrol, all);
+						tween(view.fovmax, get(lp_fovmax));
+						); 
+					showtxt_name(get(name),get(title),get(ath),get(atv));                  
+				  );
+			  );
+	, 
+       showtxt_name(get(name),get(title),get(ath),get(atv));
+	); 
+</action>
+
+<action name="showtxt_name">
+   txtadd(hotname,'hotsoptname_',%1);
+   addhotspot(get(hotname));
+   set(hotspot[get(hotname)].html,%2);
+   set(hotspot[get(hotname)].ath,%3);
+   set(hotspot[get(hotname)].atv,%4);
+   set(hotspot[get(hotname)].onclick,get(onclick));
+   hotspot[get(hotname)].loadstyle(hotspotname);
+</action>
+
+<style name="hotspotname_j" scale="1" url="plugins/textfield.swf"  padding = "7" backgroundcolor="#000000" backgroundalpha="0.5" roundedge="3" css="font-family:'FlamaBold' font-size:20px; color:#ffffff;letter-spacing:1px;" edge="top" oy ="-75" />
+
+<style name="hotspotname_j" devices="mobile" css="font-family:'FlamaBold'; font-size:15px; color:#ffffff;letter-spacing:1px;" oy ="-50" />
+
+<action name="showtxt_action_j">
+  if(view.vlookat LT -80 OR view.vlookat GT +80,
+		delayedcall(1.5,
+				if(lp_scene === xml.scene,					
+					tween(view.hlookat|view.vlookat|view.fov|view.distortion, calc('' + lp_hlookat + '|' + lp_vlookat + '|' + lp_fov + '|' + 0.0),
+						2.0, easeOutQuad,
+						set(control.usercontrol, all);
+						tween(view.fovmax, get(lp_fovmax));
+						); 
+					showtxt_name_j(get(name),get(title),get(ath),get(atv));                  
+				  );
+			  );
+	, 
+       showtxt_name_j(get(name),get(title),get(ath),get(atv));
+	);
+</action>
+
+<action name="showtxt_name_j">
+   txtadd(hotname,'hotsoptname_',%1);
+   addhotspot(get(hotname));
+   set(hotspot[get(hotname)].html,%2);
+   set(hotspot[get(hotname)].ath,%3);
+   set(hotspot[get(hotname)].atv,%4);
+   set(hotspot[get(hotname)].onclick,get(onclick));
+   hotspot[get(hotname)].loadstyle(hotspotname_j);
+</action>
+
+      <style name="dspot_style"  url="spot/spot3.png" scale="0.5"   scale.mobile="0.5" crop="0|0|128|128" zoom="true"
+	  framewidth="128"  frameheight="128" frame="0" framespeed="0.02" distorted="false" rx="0.0" ry="0.0" rz="0.0"
+	  frameoff="0" lastframe="24" onloaded="hotspot_animate();" 
+	   alpha="1.0"  	   
+       />
+     <!--海报热点样式-->
+     <style name="bwspot_style"  url="spot/spot1.png" scale="0.4"   scale.mobile="0.6" crop="0|0|128|128" zoom="true"
+	  framewidth="128"  frameheight="128" frame="0" framespeed="0.02" 
+	  frameoff="0" lastframe="24" onloaded="hotspot_animate();" 
+	  alpha="1.0" linkedphoto="false"
+	  linkedgallery="false"
+	  onclick="" 	   
+       />
+       <style name="cpspot_style"  url="skin/产品详情.png" scale="0.5" scale.mobile="0.7" zoom="true" 
+	   alpha="1.0"  	   
+       />
+     <!--360旋转热点样式-->
+
+     <style name="xzspot_style"  url="skin/360旋转.png" scale="0.5"   scale.mobile="0.7" zoom="true" 
+	 alpha="1.0"  	   
+       />
+
+     <style name="xzspot1_style"  url="skin/180旋转.png" scale="0.5"   scale.mobile="0.7" zoom="true" 
+	 alpha="1.0"  	   
+       />
+     <style name="bpspot1_style"  url="skin/爆炸分解.png" scale="0.5"   scale.mobile="0.7" zoom="true" 
+	 alpha="1.0"  	   
+       />
+     <style name="video1_style"  url="skin/video.png" scale="0.5"   scale.mobile="0.7" zoom="true" 
+	 alpha="1.0"  	  
+       />
+      <!--视频热点显示-->
+     <style name="video_style"  url="skin/video_blue.png" 
+		   width="" height="" scale="0.4" 
+		   zorder="2" zoom="true"
+		   alpha="1.0"  
+	  />
+	 <style name="video_style1"  url="skin/video_blue1.png" 
+		   width="" height="" scale.mobile="0.6"
+		   zorder="2" crop="0|0|128|128" zoom="true"
+	       framewidth="128"  frameheight="128" frame="0" framespeed="0.02" 
+	       frameoff="0" lastframe="24" onloaded="hotspot_animate();" 
+		   alpha="1.0"  
+	  />
+	 <include url="skin.xml" />
+	 <layer name="info" url="skin/introduction.png" align="center"
+         alpha="1.0" visible="true" keep="true" scale="1.0" scale.mobile="1.2"
+         onclick="" 
+         onloaded="picture_resize(get(name));" />
+     <layer name="closeinfo"  url="skin/closed.png" keep="true" parent="layer[info]" align="righttop" x="10" y="10" x.mobile="5" y.mobile="5"  scale="0.5" scale.mobile="0.5"
+          alpha="1.0" visible="true" onclick="czznclose();"
+          />
+   
+        <events name="picture_period"
+        onnewpano="
+        set(layer[info].visible,true);
+        tween(layer[info].alpha,1);
+        delayedcall(5.0,tween(layer[info].alpha,0);
+        delayedcall(5.0,set(layer[info].visible,false)));
+        "/>
+	<action name="startup" autorun="onstart">
+		if(startscene === null OR !scene[get(startscene)], copy(startscene,scene[0].name); );
+		loadscene(get(startscene), null, MERGE);
+		if(startactions !== null, startactions() );
+	</action>
+
+
+	
+	<scene name="scene_01" title="Introduction XCT7" onstart="" thumburl="panos/thumb/1.jpg" lat="" lng="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/01.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/01.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,640,1280,2560" />
+		</image>
+		 <hotspot name="spot0" style="dspot_style"  ath="41.410" atv="6.727" linkedscene="scene_2" onover="" onout="" onclick="loadscene(scene_02, null, MERGE, BLEND(1));"
+	     />
+	     <hotspot name="spot1" style="dspot_style"  ath="-40.821" atv="5.112"  linkedscene="scene_8" onover="" onout="" onclick="loadscene(scene_08, null, MERGE, BLEND(1));"
+	     />
+		
+		 <hotspot name="pop_1" style="video_style" devices="desktop|tablet+html5"
+          ath="-10.347" atv="-6.996" 
+		 onclick="popup('web', 'https://www.ecec.carrier.com/showroom/video/5languages/TD/FRA.mp4
+
+
+',600,600,true);"
+          />
+		 <hotspot name="pop_mobile1" style="video_style1"  devices="mobile" 
+          ath="-10.347" atv="-6.996" 
+		 onclick="popup('web', 'https://www.ecec.carrier.com/showroom/video/5languages/TD/FRA.mp4
+
+
+',600,600,true);"
+          />
+
+	</scene>
+
+	<scene name="scene_02" title="Groupes extérieurs Mini VRF" onstart="" thumburl="panos/thumb/2.jpg" lat="" lng="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/02.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/02.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,640,1280,2560" />
+		</image>
+		<hotspot name="spot0" style="dspot_style"   ath="73.899" atv="11.158"  linkedscene="scene_1" onover="" onout="" onclick="loadscene(scene_01, null, MERGE, BLEND(1));" 
+	    />
+		<hotspot name="spot1" style="dspot_style"  ath="-79.026" atv="21.065"  linkedscene="scene_3" onover="" onout="" onclick="loadscene(scene_03, null, MERGE, BLEND(1));" 
+	    />
+		<hotspot name="spot2" style="dspot_style"  ath="-80.293" atv="5.986" linkedscene="scene_4" onover="" onout="" onclick="loadscene(scene_04, null, MERGE, BLEND(1));" 
+	    />
+	    <!--产品二区视屏热点-->
+	    <hotspot name="pop_1" style="video_style" devices="desktop|tablet+html5" scale="0.5"
+         ath="-12.098" atv="-9.248"
+		 onclick="popup('video', ' https://www.ecec.carrier.com/showroom/video/southasia/SD.mp4', 600, 600, true);"
+          /> 
+        <hotspot name="pop_mobile1" style="video_style1" devices="mobile"
+         ath="-12.098" atv="-9.248"
+		 onclick="popup('video', ' https://www.ecec.carrier.com/showroom/video/southasia/SD.mp4', 600, 600, true);"
+          />
+		<!--产品三区视屏热点-->
+        <hotspot name="pop_2" style="video_style"  devices="desktop|tablet+html5"
+         ath="-150.046" atv="-5.155"
+		 onclick="popup('video', 'https://www.ecec.carrier.com/showroom/video/5languages/TD/FRA.mp4
+', 600, 600, true);"
+          />
+        <hotspot name="pop_mobile2" style="video_style1" devices="mobile"
+         ath="-150.046" atv="-4.855"
+		 onclick="popup('video', ' https://www.ecec.carrier.com/showroom/video/5languages/TD/FRA.mp4
+', 600, 600, true);"
+          />
+		 <!--新加的热点-->
+	    <hotspot name="spot3" style="bwspot_style"  ath="-12.736" atv="22.950"  onover="" onout="" onclick="switch(hotspot[spot7].visible);
+		 switch(hotspot[picture_1_1].visible);
+		 switch(hotspot[picture_1_4].visible);
+		 set(hotspot[spot8].visible,false);
+		 set(hotspot[picture_1_2].visible,false);
+		 set(hotspot[picture_1_3].visible,false);
+		" 
+		/>
+		<hotspot name="spot4" style="bwspot_style"  ath="7.431" atv="23.535"  onover="" onout="" onclick="switch(hotspot[spot8].visible);
+        switch(hotspot[picture_1_2].visible);
+		switch(hotspot[picture_1_3].visible);
+		set(hotspot[spot7].visible,false);
+		set(hotspot[picture_1_1].visible,false);
+		set(hotspot[picture_1_4].visible,false);
+		" 
+	    /> 
+		 
+	    <!--左边详情显示-->
+	   <hotspot name="spot7" style="cpspot_style"
+		 ath="-24.509" atv="10.033" 
+		 visible="false" onclick="set(layer[posterbg1].visible,true);
+		     set(layer[poster2-1].x,0);set(layer[poster2-1].y,0);
+             set(layer[poster2-1].visible,true);"  
+	         onover="" 
+	         onout="" />	 
+	    
+	    <hotspot 
+		name="picture_1_1"  style="xzspot_style" 
+        visible="false"
+	    ath="-26.509" atv="15.033"  	
+		onclick="popup('model', 'https://www.ecec.carrier.com/showroom/360FR/sd1fan45hp_360/360.html
+
+        ', 600, 600, true);"
+         />  
+        <!--新添加-->
+	    <hotspot 
+		name="picture_1_4"  style="bpspot1_style" 
+        visible="false"
+	    ath="-24.509" atv="20.033"  	
+		onclick="popup('model', 'https://www.ecec.carrier.com/showroom/360FR/sd1fan_expand/360.html
+
+        ', 600, 600, true);"
+         />  
+        <!--右边详情显示-->
+        <hotspot name="spot8" style="cpspot_style"  
+		ath="20.127" atv="5.351"
+		visible="false" 
+		onclick="set(layer[posterbg1].visible,true);
+		set(layer[poster2-2].x,0);set(layer[poster2-2].y,0);
+         set(layer[poster2-2].visible,true);"  
+	    onover="" 
+	    onout="" />	 
+		<hotspot name="picture_1_2"  style="xzspot_style" 
+        visible="false" ath="22.127" atv="10.351" onclick="popup('model', 'https://www.ecec.carrier.com/showroom/360FR/sd456hp_expand/360.html
+', 600, 600, true);"
+         />  
+
+		<hotspot 
+		name="picture_1_3" type="image" style="bpspot1_style" 
+        visible="false"
+		ath="20.127" atv="15.351"  
+		onclick="popup('model', 'https://www.ecec.carrier.com/showroom/360FR/sd456hp_360/360.html
+
+', 600, 600, true);"
+         />  
+        
+        <!--三区详情显示-->
+	    <hotspot name="spot5" style="bwspot_style" ath="-140.644" atv="17.262"  onover="" onout="" 
+	    onclick="switch(hotspot[spot17].visible);
+        switch(hotspot[picture_3_3].visible);
+		switch(hotspot[picture_3_4].visible);
+		set(hotspot[spot16].visible,false);
+		set(hotspot[picture_3_1].visible,false);
+		set(hotspot[picture_3_2].visible,false);
+		"
+	    />
+        <hotspot name="spot6" style="bwspot_style" ath="-114.318" atv="8.568"  onover="" onout="" 
+        onclick="switch(hotspot[spot16].visible);
+        switch(hotspot[picture_3_1].visible);
+		switch(hotspot[picture_3_2].visible);
+        set(hotspot[spot17].visible,false);
+		set(hotspot[picture_3_4].visible,false);
+		set(hotspot[picture_3_3].visible,false);
+		" 
+
+	    />
+	    <hotspot name="spot16" style="cpspot_style" ath="-107.736" atv="4.070" visible="false"
+		onclick="set(layer[posterbg1].visible,true);
+        set(layer[poster3-2].x,0);set(layer[poster3-2].y,0);
+        set(layer[poster3-2].visible,true);"  
+	    onover="" 
+	    onout="" />	 
+		<hotspot 
+		name="picture_3_1" type="image" style="xzspot_style" 
+        url="skin/360旋转.png" visible="false"
+		ath="-107.736" atv="9.070"   
+		onclick="popup('model', 'https://www.ecec.carrier.com/showroom/360FR/tdhp16hp_360/360.html
+', 600, 600, true);"
+         />  
+		 <hotspot 
+		 name="picture_3_2" type="image" style="bpspot1_style"  
+         url="skin/爆炸分解.png"  visible="false" 
+	     ath="-107.736" atv="14.070" 
+		 onclick="popup('model', 'https://www.ecec.carrier.com/showroom/360FR/tdhp16hp_expand/360.html 
+         ', 600, 600, true);" 
+         />   
+         
+
+        <hotspot name="spot17" style="cpspot_style"  url="skin/产品详情.png"
+		ath="-158.898" atv="2.418"
+	    visible="false" onclick="set(layer[posterbg1].visible,true);
+        set(layer[poster3-1].x,0);set(layer[poster3-1].y,0);
+        set(layer[poster3-1].visible,true);"  
+	    onover="" 
+	    onout="" />	 
+		 <hotspot 
+		name="picture_3_3" type="image" style="xzspot_style" 
+        visible="false"
+		ath="-158.898" atv="7.418"   		
+		onclick="popup('model', 'https://www.ecec.carrier.com/showroom/360FR/tdhp34hp_360/360.html
+
+', 600, 600, true);"
+         />  
+		 <hotspot 
+		name="picture_3_4" type="image" style="bpspot1_style" 
+        visible="false"
+		ath="-158.898" atv="12.418" 
+		onclick="popup('model', 'https://www.ecec.carrier.com/showroom/360FR/tdhp34hp_expand/360.html
+
+
+', 600, 600, true);"
+         />  
+
+	</scene>
+
+	<scene name="scene_03" title="Groupes extérieurs VRF" onstart="" thumburl="panos/thumb/3.jpg" lat="" lng="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/03.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/03.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,640,1280,2560" />
+		</image>
+    <hotspot name="spot0" style="dspot_style"  ath="-65.114" atv="17.513" linkedscene="scene_2" onover="" onout="" onclick="loadscene(scene_02, null, MERGE, BLEND(1));" 
+	    />
+		<hotspot name="spot1" style="dspot_style" ath="85.136" atv="11.764" linkedscene="scene_4" onover="" onout="" onclick="loadscene(scene_04, null, MERGE, BLEND(1));" 
+	    />
+	    <hotspot name="pop_1" style="video_style" devices="desktop|tablet+html5"
+        ath="-0.461" atv="-3.019"
+		 onclick="popup('video', 'https://www.ecec.carrier.com/showroom/video/5languages/TD/FRA.mp4
+', 600, 600, true);"
+        />
+        <hotspot name="pop_mobile1" style="video_style1" devices="mobile"
+        ath="0.461" atv="-2.019"
+		 onclick="popup('video', 'https://www.ecec.carrier.com/showroom/video/5languages/TD/FRA.mp4
+', 600, 600, true);"
+        />
+         <!--二区视频热点-->
+       <hotspot name="pop_2" style="video_style" devices="desktop"
+        ath="-107.600" atv="-7.646"
+		onclick="popup('video',  'https://www.ecec.carrier.com/showroom/video/2/2.mp4', 600, 600, true);" 
+        />
+		<hotspot name="pop_mobile2" style="video_style1" 
+		 devices="mobile"
+         ath="-107.600" atv="-7.646"
+		 onclick="popup('video', 'https://www.ecec.carrier.com/showroom/video/2/2.mp4
+', 600, 600, true);"
+        />
+        <!--三区-->
+        <hotspot name="spot2" style="bwspot_style" ath="-9.540" atv="6.130" onover="" onout="" onclick="switch(hotspot[spot16].visible);
+		 switch(hotspot[picture_1_4].visible);
+		 switch(hotspot[picture_1_5].visible);
+		 set(hotspot[spot17].visible,false);
+		 set(hotspot[picture_2_1].visible,false);
+		 set(hotspot[picture_2_2].visible,false);" 
+	    />
+	    <hotspot name="spot16" style="cpspot_style" ath="-23.740" atv="2.471" visible="false"
+		onclick="set(layer[posterbg1].visible,true);
+        set(plugin[navigator].navigationClick,true);
+        set(layer[poster3-1].visible,true);"  
+	    onover="" 
+	    onout="" />	 
+		<hotspot 
+		name="picture_1_4" type="image" style="xzspot_style" 
+        url="skin/360旋转.png" visible="false"
+		ath="-25.740" atv="7.471"   
+		onclick="popup('model', 'https://www.ecec.carrier.com/showroom/360FR/tdhp34hp_360/360.html
+', 600, 600, true);"
+         />  
+		  <hotspot 
+		name="picture_1_5" type="image" style="bpspot1_style" 
+        url="skin/爆炸分解.png"  visible="false"
+	    ath="-23.740" atv="12.471"
+		onclick="popup('model', 'https://www.ecec.carrier.com/showroom/360FR/tdhp34hp_expand/360.html
+ ', 600, 600, true);"
+         />  
+	    <hotspot name="spot3" style="bwspot_style" ath="6.701" atv="6.251" onover="" onout="" onclick="switch(hotspot[spot17].visible);
+		 switch(hotspot[picture_2_1].visible);
+		 switch(hotspot[picture_2_2].visible);
+		 set(hotspot[spot16].visible,false);
+		 set(hotspot[picture_1_4].visible,false);
+		 set(hotspot[picture_1_5].visible,false)
+		" 
+	    />
+	    <hotspot name="spot17" style="cpspot_style"  url="skin/产品详情.png"
+		ath="22.897" atv="2.828"
+	    visible="false" onclick="set(layer[posterbg1].visible,true);
+        set(layer[poster3-2].x,0);set(layer[poster3-2].y,0);
+        set(layer[poster3-2].visible,true);"  
+	    onover="" 
+	    onout="" />	 
+		 <hotspot 
+		name="picture_2_1" type="image" style="xzspot_style" 
+        visible="false"
+		 ath="24.897" atv="7.828" 		
+		onclick="popup('model', 'https://www.ecec.carrier.com/showroom/360FR/tdhp16hp_360/360.html
+
+', 600, 600, true);"
+         />  
+		 <hotspot 
+		name="picture_2_2" type="image" style="bpspot1_style" 
+        visible="false"
+		ath="22.897" atv="12.828"
+		onclick="popup('model', 'https://www.ecec.carrier.com/showroom/360FR/tdhp16hp_expand/360.html
+', 600, 600, true);"
+         />  
+	    <!--二区-->
+	    <hotspot name="spot4" style="bwspot_style" ath="-90.066" atv="21.145" onover="" onout="" onclick="switch(hotspot[spot15].visible);
+		 switch(hotspot[picture_1_1].visible);
+		 switch(hotspot[picture_1_8].visible);
+		 set(hotspot[spot14].visible,false);
+		 set(hotspot[picture_1_2].visible,false);
+		 set(hotspot[picture_1_3].visible,false);
+		 " 
+	    />
+        <hotspot name="spot5" style="bwspot_style" ath="-79.589" atv="15.155" onover="" onout="" onclick="switch(hotspot[spot14].visible);
+         switch(hotspot[picture_1_2].visible);
+		 switch(hotspot[picture_1_3].visible);
+		 set(hotspot[spot15].visible,false);
+		 set(hotspot[picture_1_1].visible,false);
+		 set(hotspot[picture_1_8].visible,false);
+		 " 
+		 
+		 />
+	    <hotspot name="spot15" style="cpspot_style"
+		 ath="-84.388" atv="12.236"
+		 visible="false" onclick="set(layer[posterbg1].visible,true);
+             set(layer[poster2-1].x,0);set(layer[poster2-1].y,0);
+             set(layer[poster2-1].visible,true);"  
+	         onover="" 
+	         onout="" />	 
+	    
+	    <hotspot 
+		name="picture_1_1"  style="xzspot_style" 
+        visible="false"
+	    ath="-82.388" atv="17.236"  	
+		onclick="popup('model', 'https://www.ecec.carrier.com/showroom/360FR/sd1fan45hp_360/360.html
+
+
+        ', 600, 600, true);"
+         />  
+         <!--新添加-->
+	    <hotspot 
+		name="picture_1_8"  style="bpspot1_style" 
+        visible="false"
+	    ath="-84.388" atv="22.236"	
+		onclick="popup('model', 'https://www.ecec.carrier.com/showroom/360FR/sd1fan_expand/360.html
+
+        ', 600, 600, true);"
+         />  
+
+	    <hotspot name="spot14" style="cpspot_style"  
+		ath="-75.339" atv="10.194"
+		visible="false" onclick="set(layer[posterbg1].visible,true);
+		set(layer[poster2-2].x,0);set(layer[poster2-2].y,0);
+         set(layer[poster2-2].visible,true);"  
+	    onover="" 
+	    onout="" />	 
+		
+		<hotspot name="picture_1_2"  style="xzspot_style" 
+        visible="false" ath="-73.339" atv="15.194" onclick="popup('model', 'https://www.ecec.carrier.com/showroom/360FR/sd456hp_360/360.html
+
+', 600, 600, true);"
+         />  
+		<hotspot 
+		name="picture_1_3" type="image" style="bpspot1_style" 
+        visible="false"
+		ath="-75.339" atv="20.194" 
+		onclick="popup('model', 'https://www.ecec.carrier.com/showroom/360FR/sd456hp_expand/360.html
+
+', 600, 600, true);"
+         />  
+	    
+
+        <!--四区海报-->
+	    <hotspot name="spot6" style="bwspot_style" ath="89.180" atv="-0.310" onover="" onout="" onclick="set(layer[posterbg1].visible,true);
+             set(layer[poster4-1].x,0);set(layer[poster4-1].y,0);
+             set(layer[poster4-1].visible,true);" 
+	    />
+	    <hotspot name="spot7" style="bwspot_style" ath="93.527" atv="-0.192" onover="" onout="" onclick="set(layer[posterbg1].visible,true);
+             set(layer[poster4-2].x,0);set(layer[poster4-2].y,0);
+             set(layer[poster4-2].visible,true);" 
+	    />
+	    <hotspot name="spot8" style="bwspot_style" ath="98.830" atv="-0.197" onover="" onout="" onclick="set(layer[posterbg1].visible,true);
+             set(layer[poster4-3].x,0);set(layer[poster4-3].y,0);
+             set(layer[poster4-3].visible,true);" 
+	    />
+	    <hotspot name="spot9" style="bwspot_style" ath="106.018" atv="0.060" onover="" onout="" onclick="set(layer[posterbg1].visible,true);
+       set(layer[poster4-4].x,0);set(layer[poster4-4].y,0);
+        set(layer[poster4-4].visible,true);" 
+	    />
+
+         <!--四区360-->
+        <hotspot 
+		name="picture_4_1" type="image" style="xzspot_style" ath="80.552" atv="-5.895" 
+		onclick="popup('model', 'https://www.ecec.carrier.com/showroom/360FR/2_waycassette_360/360.html
+
+', 600, 600, true);"
+         />  
+    <hotspot 
+		name="picture_4_2" style="xzspot_style" ath="83.919" atv="-7.559"
+       onclick="popup('model', 'https://www.ecec.carrier.com/showroom/360FR/1_waycassette_360/360.html
+
+', 600, 600, true);"
+         />  
+		 <hotspot 
+		name="picture_4_3" style="xzspot_style" ath="87.015" atv="-9.821"
+		onclick="popup('model', 'https://www.ecec.carrier.com/showroom/360FR/compact_4_way_360/360.html
+', 600, 600, true);"
+         />  
+		 <hotspot 
+		name="picture_4_4" style="xzspot_style" ath="92.237" atv="-15.475" 
+		onclick="popup('model', 'https://www.ecec.carrier.com/showroom/360FR/roundwaycassette_360/360.html
+', 600, 600, true);"
+         />  
+	</scene>
+
+	<scene name="scene_04" title="Cassettes" onstart="" thumburl="panos/thumb/4.jpg" lat="" lng="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/04.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/04.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,640,1280,2560" />
+		</image>
+    <hotspot name="spot0" style="dspot_style" ath="100.526" atv="13.352" linkedscene="scene_3" onover="" onout="" onclick="loadscene(scene_03, null, MERGE, BLEND(1));" 
+	    />
+		<hotspot name="spot1" style="dspot_style" ath="109.424" atv="6.227" linkedscene="scene_2" onover="" onout="" onclick="loadscene(scene_02, null, MERGE, BLEND(1));" 
+	    />
+		
+		<hotspot name="spot2" style="dspot_style" ath="-68.897" atv="12.494"  linkedscene="scene_6" onover="" onout="" onclick="loadscene(scene_06, null, MERGE, BLEND(1));" 
+	    />
+		
+		
+	    <hotspot name="pop_1" style="video_style" devices="desktop|tablet+html5"
+         ath="152.643" atv="-1.733"
+		 onclick="popup('video', 'https://www.ecec.carrier.com/showroom/video/5languages/TD/FRA.mp4
+
+
+', 600, 600, true);"
+        />
+        <hotspot name="pop_mobile1" style="video_style1" devices="mobile"
+         ath="153.643" atv="-1.233"
+		 onclick="popup('video', 'https://www.ecec.carrier.com/showroom/video/5languages/TD/FRA.mp4
+
+
+', 600, 600, true);"
+        />
+        <!--四区海报-->
+
+         <hotspot name="spot3" style="bwspot_style" ath="-36.902" atv="1.387" onover="" onout="" onclick="set(layer[posterbg1].visible,true);
+               set(layer[poster4-1].x,0);set(layer[poster4-1].y,0);
+             set(layer[poster4-1].visible,true);" />
+         <hotspot name="spot4" style="bwspot_style" ath="-14.163" atv="1.877" onover="" onout="" onclick="set(layer[posterbg1].visible,true);
+               set(layer[poster4-2].x,0);set(layer[poster4-2].y,0);
+             set(layer[poster4-2].visible,true);" />
+         <hotspot name="spot5" style="bwspot_style" ath="14.064" atv="2.129" onover="" onout="" onclick="set(layer[posterbg1].visible,true);
+               set(layer[poster4-3].x,0);set(layer[poster4-3].y,0);
+             set(layer[poster4-3].visible,true);" />
+         <hotspot name="spot6" style="bwspot_style" ath="42.617" atv="0.996" onover="" onout="" onclick="set(layer[posterbg1].visible,true);
+               set(layer[poster4-4].x,0);set(layer[poster4-4].y,0);
+             set(layer[poster4-4].visible,true);" />
+         <!--四区360-->
+           <hotspot 
+		name="picture_4_1" type="image" style="xzspot_style" ath="-56.942" atv="-9.624"
+		onclick="popup('model', 'https://www.ecec.carrier.com/showroom/360FR/2_waycassette_360/360.html
+', 600, 600, true);"
+         />  
+    <hotspot 
+		name="picture_4_2" style="xzspot_style" ath="-34.629" atv="-13.580"
+       onclick="popup('model', 'https://www.ecec.carrier.com/showroom/360FR/1_waycassette_360/360.html', 600, 600, true);"
+         />  
+		 <hotspot 
+		name="picture_4_3" style="xzspot_style" ath="5.990" atv="-20.911"
+		onclick="popup('model', 'https://www.ecec.carrier.com/showroom/360FR/compact_4_way_360/360.html
+
+', 600, 600, true);"
+         />  
+		 <hotspot 
+		name="picture_4_4" style="xzspot_style" ath="56.410" atv="-15.825"
+		onclick="popup('model', ' https://www.ecec.carrier.com/showroom/360FR/roundwaycassette_360/360.html
+', 600, 600, true);"
+         />  
+	</scene>
+
+	<scene name="scene_05" title="Gainables" onstart="" thumburl="panos/thumb/5.jpg" lat="" lng="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/05.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/05.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,640,1280,2560" />
+		</image>
+    <hotspot name="spot0" style="dspot_style" ath="98.966" atv="22.440"  linkedscene="scene_6" onover="" onout="" onclick="loadscene(scene_06, null, MERGE, BLEND(1));" 
+	    />
+		<hotspot name="spot_1" style="dspot_style" ath="-85.788" atv="18.620"  linkedscene="scene_7" onover="" onout="" onclick="loadscene(scene_07, null, MERGE, BLEND(1));" 
+	    />
+		<hotspot name="spot_2" style="dspot_style" ath="-80.257" atv="6.435"  linkedscene="scene_8" onover="" onout="" onclick="loadscene(scene_08, null, MERGE, BLEND(1));" 
+	    />
+		
+		 <!--五区热点-->
+		<hotspot name="spot1" style="bwspot_style" ath="-20.223" atv="0.246" onover="" onout="" onclick="set(layer[posterbg1].visible,true);
+               set(layer[poster5-1].x,0);set(layer[poster5-1].y,0);
+             set(layer[poster5-1].visible,true);" />
+		<hotspot name="spot2" style="bwspot_style" ath="1.048" atv="-0.003" onover="" onout="" onclick="set(layer[posterbg1].visible,true);
+               set(layer[poster5-2].x,0);set(layer[poster5-2].y,0);
+             set(layer[poster5-2].visible,true);" />
+		<hotspot name="spot3" style="bwspot_style" ath="21.563" atv="-0.468" onover="" onout="" onclick="set(layer[posterbg1].visible,true);
+              set(layer[poster5-3].x,0);set(layer[poster5-3].y,0);
+             set(layer[poster5-3].visible,true);" />
+
+          	<hotspot 
+		name="picture_5_1" style="xzspot_style" ath="-23.641" atv="-12.748"
+		
+		onclick="popup('model', 'https://www.ecec.carrier.com/showroom/360FR/highstaticduct_360/360.html
+
+', 600, 600, true);"
+         />  
+    <hotspot 
+		name="picture_5_2" style="xzspot_style" ath="1.442" atv="-14.246"
+		onclick="popup('model', 'https://www.ecec.carrier.com/showroom/360FR/standardstaticduct_360/360.html
+
+', 600, 600, true);"
+         />  
+		 <hotspot 
+		name="picture_5_3" style="xzspot_style" ath="24.787" atv="-12.221"
+		onclick="popup('model', 'https://www.ecec.carrier.com/showroom/360FR/slimduct_360/360.html
+', 600, 600, true);"
+         />  
+		
+
+        <!--六区热点-->
+		<hotspot name="spot7" style="bwspot_style" ath="133.128" atv="-14.866" onout="" 
+			onclick="switch(hotspot[spot13].visible);
+			         switch(hotspot[picture_6_1].visible);
+                     set(hotspot[spot14].visible,false);
+                     set(hotspot[picture_6_2].visible,false);
+                     set(hotspot[spot15].visible,false);
+                     set(hotspot[picture_6_3].visible,false);
+                     set(hotspot[spot16].visible,false);
+                     set(hotspot[picture_6_4].visible,false);
+                     set(hotspot[spot17].visible,false);
+                     set(hotspot[picture_6_5].visible,false);
+                     set(hotspot[spot18].visible,false);
+                     set(hotspot[picture_6_6].visible,false);
+			         " 
+			/>
+        <hotspot name="spot8" style="bwspot_style" ath="142.987" atv="-17.010" onout=""  
+        	     onclick="switch(hotspot[spot14].visible); 
+        	          switch(hotspot[picture_6_2].visible); 
+                      set(hotspot[spot13].visible,false);
+                      set(hotspot[picture_6_1].visible,false);
+                      set(hotspot[spot15].visible,false); 
+                      set(hotspot[picture_6_3].visible,false);
+                      set(hotspot[spot16].visible,false); 
+                      set(hotspot[picture_6_4].visible,false); 
+                      set(hotspot[picture_6_5].visible,false); 
+                      set(hotspot[spot18].visible,false); 
+                      set(hotspot[picture_6_6].visible,false); 
+        	          " 
+                     
+        	 /> 
+        <hotspot name="spot9" style="bwspot_style" ath="161.246" atv="-20.237" onout="" 
+        	onclick="switch(hotspot[spot15].visible);
+        	         switch(hotspot[picture_6_3].visible);
+                     set(hotspot[spot14].visible,false);
+                     set(hotspot[picture_6_2].visible,false);
+                     set(hotspot[spot13].visible,false);
+                     set(hotspot[picture_6_1].visible,false);
+                     set(hotspot[spot16].visible,false);
+                     set(hotspot[picture_6_4].visible,false);
+                     set(hotspot[spot17].visible,false);
+                     set(hotspot[picture_6_5].visible,false);
+                     set(hotspot[spot18].visible,false);
+                     set(hotspot[picture_6_6].visible,false);
+        	         " 
+                     
+        	/>
+        <hotspot name="spot10" style="bwspot_style" ath="160.168" atv="-11.274" onout="" 
+        	     onclick="switch(hotspot[spot16].visible);   
+        	              switch(hotspot[picture_6_4].visible);
+
+                          set(hotspot[spot14].visible,false);
+                          set(hotspot[picture_6_2].visible,false);
+
+                          set(hotspot[spot15].visible,false);
+                          set(hotspot[picture_6_3].visible,false);
+
+                          set(hotspot[spot13].visible,false);
+                          set(hotspot[picture_6_1].visible,false);
+
+                          set(hotspot[spot17].visible,false);
+                          set(hotspot[picture_6_5].visible,false);
+
+                          set(hotspot[spot18].visible,false);
+                          set(hotspot[picture_6_6].visible,false);
+        	              " 
+        	         />
+         <hotspot name="spot11" style="bwspot_style" ath="146.172" atv="1.030" onout="" 
+         	    onclick="switch(hotspot[spot17].visible);
+         	             switch(hotspot[picture_6_5].visible);
+                         set(hotspot[spot14].visible,false);
+                         set(hotspot[picture_6_2].visible,false);
+                         set(hotspot[spot15].visible,false);
+                         set(hotspot[picture_6_3].visible,false);
+                         set(hotspot[spot13].visible,false);
+                         set(hotspot[picture_6_1].visible,false);
+                         set(hotspot[spot16].visible,false);
+                         set(hotspot[picture_6_4].visible,false);
+                         set(hotspot[spot18].visible,false);
+                         set(hotspot[picture_6_6].visible,false);
+
+         	             "
+                         
+         	              />
+        <hotspot name="spot12" style="bwspot_style" ath="156.163" atv="2.079" onout="" 
+        	onclick="switch(hotspot[spot18].visible);
+        	         switch(hotspot[picture_6_6].visible);
+                    
+                     set(hotspot[spot14].visible,false);
+                     set(hotspot[picture_6_2].visible,false);
+                     set(hotspot[spot15].visible,false);
+                     set(hotspot[picture_6_3].visible,false);
+                     set(hotspot[spot13].visible,false);
+                     set(hotspot[picture_6_1].visible,false);
+                     set(hotspot[spot16].visible,false);
+                     set(hotspot[picture_6_4].visible,false);
+                     set(hotspot[spot17].visible,false);
+                     set(hotspot[picture_6_5].visible,false);
+        	         "
+        	         />
+
+<hotspot name="spot13" style="cpspot_style"  ath="124.960" atv="-12.501"  visible="false"
+	         onclick="set(layer[posterbg1].visible,true);
+             set(layer[poster6-6].x,0);set(layer[poster6-6].y,0);
+             set(layer[poster6-6].visible,true);"  
+	         onover="" 
+	         onout="" />
+ <hotspot name="picture_6_1" style="xzspot_style" ath="124.960" atv="-7.501"  visible="false"
+        onclick="popup('model', 'https://www.ecec.carrier.com/showroom/360FR/flexdc_360/360.html
+', 600, 600, true);"
+        />  
+	   
+
+<hotspot name="spot14" style="cpspot_style"  ath="151.454" atv="-16.263" visible="false"
+	         onclick="set(layer[posterbg1].visible,true);
+             set(layer[poster6-5].x,0);set(layer[poster6-5].y,0);
+             set(layer[poster6-5].visible,true);"  
+	         onover="" 
+	         onout="" />
+			 
+ <hotspot name="picture_6_2" style="xzspot_style" ath="151.454" atv="-11.263" visible="false" 
+         onclick="popup('model', ' https://www.ecec.carrier.com/showroom/360FR/flexac_360/360.html', 600, 600, true);"/>
+		
+ <hotspot name="spot15" style="cpspot_style" ath="172.799" atv="-28.374" visible="false"
+	          onclick="set(layer[posterbg1].visible,true); 
+              set(layer[poster6-2].x,0);set(layer[poster6-2].y,0); 
+              set(layer[poster6-2].visible,true);"   
+	          onover=""  
+	          onout="" /> 
+<hotspot name="picture_6_3" style="xzspot1_style" ath="172.799" atv="-23.374" visible="false"
+        onclick="popup('model', 'https://www.ecec.carrier.com/showroom/360FR/highwallup_360/360.html', 600, 600, true);"/>
+
+<hotspot name="spot16" style="cpspot_style"  ath="172.811" atv="-16.848" visible="false"
+	         onclick="set(layer[posterbg1].visible,true);
+             set(layer[poster6-1].x,0);set(layer[poster6-1].y,0);
+             set(layer[poster6-1].visible,true);"  
+	         onover="" 
+	         onout="" />
+<hotspot name="picture_6_4" style="xzspot1_style" ath="172.811" atv="-11.848" visible="false"
+        onclick="popup('model', 'https://www.ecec.carrier.com/showroom/360FR/highwalldown_360/360.html
+', 600, 600, true);"/>
+		
+
+<hotspot name="spot17" style="cpspot_style" ath="139.373" atv="-0.557" visible="false"
+	         onclick="set(layer[posterbg1].visible,true);
+             set(layer[poster6-4].x,0);set(layer[poster6-4].y,0);
+             set(layer[poster6-4].visible,true);"  
+	         onover="" 
+	         onout="" />
+<hotspot name="picture_6_5" style="xzspot1_style"  ath="139.373" atv="4.557" visible="false"
+        onclick="popup('model', 'https://www.ecec.carrier.com/showroom/360FR/consolerecessed_360/360.html
+
+
+', 600, 600, true);"/>
+		
+
+<hotspot name="spot18" style="cpspot_style" ath="164.120" atv="0.385" visible="false"
+	         onclick="set(layer[posterbg1].visible,true);
+             set(layer[poster6-3].x,0);set(layer[poster6-3].y,0);
+             set(layer[poster6-3].visible,true);"  
+	         onover="" 
+	         onout="" />
+<hotspot name="picture_6_6" style="xzspot1_style"  ath="164.120" atv="5.385" visible="false"
+        onclick="popup('model', 'https://www.ecec.carrier.com/showroom/360FR/2_wayconsole_360/360.html
+', 600, 600, true);"/>
+		
+	</scene>
+
+	<scene name="scene_06" title="Mural / Plafonnier / Consoles" onstart="" thumburl="panos/thumb/6.jpg" lat="" lng="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/06.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/06.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,640,1280,2560" />
+		</image>
+    <hotspot name="spot0" style="dspot_style"  ath="-74.804" atv="15.061" linkedscene="scene_4" onover="" onout="" onclick="loadscene(scene_04, null, MERGE, BLEND(1));"
+	     />
+	    <hotspot name="spot_0" style="dspot_style"   ath="104.479" atv="17.638" linkedscene="scene_5" onover="" onout="" onclick="loadscene(scene_05, null, MERGE, BLEND(1));"
+	     />
+	     <hotspot name="spot_1" style="dspot_style" ath="75.482" atv="7.456" linkedscene="scene_7" onover="" onout="" onclick="loadscene(scene_07, null, MERGE, BLEND(1));"
+	     />
+
+        <!--六区热点-->
+		<hotspot name="spot1" style="bwspot_style" ath="-22.746" atv="-17.771" onover="" onout="" 
+			onclick="switch(hotspot[spot12].visible);
+			         switch(hotspot[picture_6_1].visible);
+                     set(hotspot[spot13].visible,false);
+                     set(hotspot[picture_6_2].visible,false);
+                     set(hotspot[spot14].visible,false);
+                     set(hotspot[picture_6_3].visible,false);
+                     set(hotspot[spot15].visible,false);
+                     set(hotspot[picture_6_4].visible,false);
+                     set(hotspot[spot16].visible,false);
+                     set(hotspot[picture_6_5].visible,false);
+                     set(hotspot[spot17].visible,false);
+                     set(hotspot[picture_6_6].visible,false);
+			         " 
+
+			/>
+
+        <hotspot name="spot2" style="bwspot_style" ath="-11.805" atv="-17.256" onover="" onout=""  
+        	 onclick="switch(hotspot[spot13].visible); 
+        	          switch(hotspot[picture_6_2].visible); 
+                      set(hotspot[spot12].visible,false);
+                      set(hotspot[picture_6_1].visible,false); 
+                      set(hotspot[spot14].visible,false); 
+                      set(hotspot[picture_6_3].visible,false); 
+                      set(hotspot[spot15].visible,false); 
+                      set(hotspot[picture_6_4].visible,false); 
+                      set(hotspot[spot16].visible,false); 
+                      set(hotspot[picture_6_5].visible,false); 
+                      set(hotspot[spot17].visible,false); 
+                      set(hotspot[picture_6_6].visible,false); 
+
+
+        	          "  
+
+
+        	 /> 
+        <hotspot name="spot3" style="bwspot_style" ath="19.565" atv="-14.104" onover="" onout="" 
+        	onclick="switch(hotspot[spot14].visible);
+        	         switch(hotspot[picture_6_3].visible);
+                     set(hotspot[spot13].visible,false);
+                     set(hotspot[picture_6_2].visible,false);
+                     set(hotspot[spot12].visible,false);
+                     set(hotspot[picture_6_1].visible,false);
+                     set(hotspot[spot15].visible,false);
+                     set(hotspot[picture_6_4].visible,false);
+                     set(hotspot[spot16].visible,false);
+                     set(hotspot[picture_6_5].visible,false);
+                     set(hotspot[spot17].visible,false);
+                     set(hotspot[picture_6_6].visible,false);
+        	         " 
+        	/>
+        <hotspot name="spot4" style="bwspot_style" ath="19.612" atv="-8.058" onover="" onout="" 
+        	onclick="switch(hotspot[spot15].visible);
+        	         switch(hotspot[picture_6_4].visible);
+                     set(hotspot[spot13].visible,false);
+                     set(hotspot[picture_6_2].visible,false);
+                     set(hotspot[spot14].visible,false);
+                     set(hotspot[picture_6_3].visible,false);
+                     set(hotspot[spot12].visible,false);
+                     set(hotspot[picture_6_1].visible,false);
+                     set(hotspot[spot16].visible,false);
+                     set(hotspot[picture_6_5].visible,false);
+                     set(hotspot[spot17].visible,false);
+                     set(hotspot[picture_6_6].visible,false);
+                    " 
+
+        	/>
+        <hotspot name="spot5" style="bwspot_style" ath="-7.815" atv="1.422" onover="" onout="" 
+        onclick="switch(hotspot[spot16].visible);
+                 switch(hotspot[picture_6_5].visible);
+                 set(hotspot[spot13].visible,false);
+                 set(hotspot[picture_6_2].visible,false);
+                 set(hotspot[spot14].visible,false);
+                 set(hotspot[picture_6_3].visible,false);
+                 set(hotspot[spot15].visible,false);
+                 set(hotspot[picture_6_4].visible,false);
+                 set(hotspot[spot12].visible,false);
+                 set(hotspot[picture_6_1].visible,false);
+                 set(hotspot[spot17].visible,false);
+                 set(hotspot[picture_6_6].visible,false);
+        " 
+        />
+        <hotspot name="spot6" style="bwspot_style" ath="7.659" atv="1.683" onover="" onout="" 
+        	onclick="switch(hotspot[spot17].visible);
+        	         switch(hotspot[picture_6_6].visible);
+                     set(hotspot[spot13].visible,false);
+                     set(hotspot[picture_6_2].visible,false);
+                     set(hotspot[spot14].visible,false);
+                     set(hotspot[picture_6_3].visible,false);
+                     set(hotspot[spot15].visible,false);
+                     set(hotspot[picture_6_4].visible,false);
+                     set(hotspot[spot16].visible,false);
+                     set(hotspot[picture_6_5].visible,false);
+                     set(hotspot[spot12].visible,false);
+                     set(hotspot[picture_6_1].visible,false);
+
+        	         " 
+        	/>
+		<hotspot name="spot12" style="cpspot_style"  ath="-31.546" atv="-15.663" visible="false"
+	         onclick="set(layer[posterbg1].visible,true);
+	         set(layer[poster6-6].x,0);set(layer[poster6-6].y,0);
+             set(layer[poster6-6].visible,true);"  
+	         onover="" 
+	         onout="" />
+	    <hotspot name="picture_6_1" style="xzspot_style" ath="-31.546" atv="-10.663" visible="false"
+        onclick="popup('model', 'https://www.ecec.carrier.com/showroom/360FR/flexdc_360/360.html
+
+', 600, 600, true);"
+        />  
+		
+         
+		<hotspot name="spot13" style="cpspot_style"  ath="-4.339" atv="-14.665" visible="false" 
+	          onclick="set(layer[posterbg1].visible,true); 
+             set(layer[poster6-5].x,0);set(layer[poster6-5].y,0); 
+              set(layer[poster6-5].visible,true);"  
+	          onover=""  
+	          onout="" />
+	     <hotspot name="picture_6_2" style="xzspot_style" ath="-4.339" atv="-9.665" visible="false" 
+         onclick="popup('model', 'https://www.ecec.carrier.com/showroom/360FR/flexac_360/360.html', 600, 600, true);"/> 
+
+		<hotspot name="spot14" style="cpspot_style"  ath="32.588" atv="-16.144" visible="false"
+	         onclick="set(layer[posterbg1].visible,true);
+             set(layer[poster6-2].x,0);set(layer[poster6-2].y,0);
+             set(layer[poster6-2].visible,true);"  
+	         onover="" 
+	         onout="" />
+	    <hotspot name="picture_6_3" style="xzspot1_style" ath="32.588" atv="-11.144" visible="false"
+        onclick="popup('model', ' https://www.ecec.carrier.com/showroom/360FR/highwallup_360/360.html', 600, 600, true);"/>
+		
+        <hotspot name="spot15" style="cpspot_style"  ath="32.398" atv="-6.873" visible="false"
+	         onclick="set(layer[posterbg1].visible,true);
+             set(layer[poster6-1].x,0);set(layer[poster6-1].y,0);
+             set(layer[poster6-1].visible,true);"  
+	         onover="" 
+	         onout="" />
+	    <hotspot name="picture_6_4" style="xzspot1_style" ath="32.398" atv="-1.873" visible="false"
+        onclick="popup('model', 'https://www.ecec.carrier.com/showroom/360FR/highwalldown_360/360.html
+', 600, 600, true);"/>
+
+		
+        <hotspot name="spot16" style="cpspot_style"  ath="-17.654" atv="-0.743" visible="false"
+	         onclick="set(layer[posterbg1].visible,true);
+             set(layer[poster6-4].x,0);set(layer[poster6-4].y,0);
+             set(layer[poster6-4].visible,true);"  
+	         onover="" 
+	         onout="" />
+	    <hotspot name="picture_6_5" style="xzspot_style"  ath="-17.654" atv="4.743" visible="false"
+        onclick="popup('model', 'https://www.ecec.carrier.com/showroom/360FR/consolerecessed_360/360.html', 600, 600, true);"/>
+        <hotspot name="spot17" style="cpspot_style"  ath="14.939" atv="0.331" visible="false"
+	         onclick="set(layer[posterbg1].visible,true);
+             set(layer[poster6-3].x,0);set(layer[poster6-3].y,0);
+             set(layer[poster6-3].visible,true);"  
+	         onover="" 
+	         onout="" />
+	    <hotspot name="picture_6_6" style="xzspot1_style" ath="14.939" atv="5.331" visible="false"
+        onclick="popup('model', 'https://www.ecec.carrier.com/showroom/360FR/2_wayconsole_360/360.html
+', 600, 600, true);"/>
+        <!--五区热点-->
+		<hotspot name="spot7" style="bwspot_style" ath="108.451" atv="0.368" onout="" onclick="set(layer[posterbg1].visible,true);
+             set(layer[poster5-1].x,0);set(layer[poster5-1].y,0);
+             set(layer[poster5-1].visible,true);" />
+		<hotspot name="spot8" style="bwspot_style" ath="119.151" atv="0.272" onout="" onclick="set(layer[posterbg1].visible,true);set(layer[poster5-2].x,0);set(layer[poster5-2].y,0);
+                             set(layer[poster5-2].visible,true);" />
+		<hotspot name="spot9" style="bwspot_style" ath="135.142" atv="1.098" onout="" onclick="set(layer[posterbg1].visible,true);
+             set(layer[poster5-3].x,0);set(layer[poster5-3].y,0);
+             set(layer[poster5-3].visible,true);" />
+
+
+       <hotspot name="picture_5_1" style="xzspot_style" ath="101.145" atv="-8.452" onclick="popup('model', 'https://www.ecec.carrier.com/showroom/360FR/highstaticduct_360/360.html
+
+', 600, 600, true);"
+         />  
+       <hotspot name="picture_5_2" style="xzspot_style" ath="110.313" atv="-10.387" onclick="popup('model', 'https://www.ecec.carrier.com/showroom/360FR/standardstaticduct_360/360.html
+
+', 600, 600, true);"
+         />  
+		<hotspot name="picture_5_3" style="xzspot_style" ath="126.018" atv="-13.345" onclick="popup('model', 'https://www.ecec.carrier.com/showroom/360FR/slimduct_360/360.html
+
+', 600, 600, true);"
+         />
+	</scene>
+
+	<scene name="scene_07" title="DX kits, Ventilation et composants" onstart="" thumburl="panos/thumb/7.jpg" lat="" lng="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/07.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/07.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,640,1280,2560" />
+		</image>
+     <hotspot name="spot0" style="dspot_style"  ath="100.323" atv="15.990"  linkedscene="scene_8" onover="" onout="" onclick="loadscene(scene_08, null, MERGE, BLEND(1));"
+	     />
+	     <hotspot name="spot_1" style="dspot_style"  ath="79.639" atv="8.330"  linkedscene="scene_1" onover="" onout="" onclick="loadscene(scene_01, null, MERGE, BLEND(1));"
+	     />
+	     <hotspot name="spot_2" style="dspot_style"  ath="-61.479" atv="7.769"  linkedscene="scene_6" onover="" onout="" onclick="loadscene(scene_06, null, MERGE, BLEND(1));"
+	     />
+
+         <!--七区热点-->
+	    <hotspot name="spot1" style="bwspot_style" ath="4.950" atv="-19.901" onout="" 
+	    	onclick="switch(hotspot[spot9].visible);
+	    	         switch(hotspot[picture_7_1].visible);
+                     set(hotspot[spot10].visible,false);
+			         set(hotspot[picture_7_2].visible,false);
+                     set(hotspot[spot11].visible,false);
+	    	         set(hotspot[picture_7_4].visible,false);
+	    	         set(hotspot[pop_7].visible,false);
+	    	         " 
+	    	             />
+	    <hotspot name="spot2" style="bwspot_style" ath="-40.388" atv="14.713" onout="" 
+			onclick="switch(hotspot[spot10].visible);
+			         switch(hotspot[picture_7_2].visible);
+                     set(hotspot[spot9].visible,false);
+			         set(hotspot[picture_7_1].visible,false);
+                     set(hotspot[spot11].visible,false);
+	    	         set(hotspot[picture_7_4].visible,false);
+	    	         set(hotspot[pop_7].visible,false);s
+
+			         " 
+			         />
+	    <hotspot name="spot3" style="bwspot_style" ath="3.777" atv="15.995" onout="" 
+	    	onclick="switch(hotspot[spot11].visible);
+	    	         switch(hotspot[picture_7_4].visible);
+	    	         switch(hotspot[pop_7].visible);
+	    	         set(hotspot[spot10].visible,false);
+			         set(hotspot[picture_7_2].visible,false);
+                     set(hotspot[spot9].visible,false);
+	    	         set(hotspot[picture_7_1].visible,false);
+                    "
+	    	/>
+	    <hotspot name="spot9" style="cpspot_style"  ath="15.850" atv="-20.414" visible="false"
+	    onclick="set(layer[posterbg1].visible,true);
+             set(layer[poster7-3].x,0);set(layer[poster7-3].y,0);
+             set(layer[poster7-3].visible,true);"  
+	    onover="" 
+	    onout="" />
+	
+	 <hotspot 
+		name="picture_7_1" type="image" style="xzspot_style" 
+        visible="false"
+		ath="15.850" atv="-15.414"
+		onclick="popup('model', 'https://www.ecec.carrier.com/showroom/360FR/hrv_360/360.html
+', 600, 600, true"
+          />
+		
+        <hotspot name="spot10" style="cpspot_style"  ath="-30.447" atv="9.540" visible="false"
+	    onclick="set(layer[posterbg1].visible,true);
+                 set(layer[poster7-5].x,0);set(layer[poster7-5].y,0);
+                 set(layer[poster7-5].visible,true);"  
+	    onover="" 
+	    onout="" />
+	
+	 <hotspot 
+		name="picture_7_2" type="image" style="xzspot_style" 
+        visible="false"
+		ath="-30.447" atv="14.540" 
+		onclick="popup('model', 'https://www.ecec.carrier.com/showroom/360FR/black_coatedfin_360/360.html
+
+', 600, 600, true"
+          />
+		
+     <hotspot name="spot11" style="cpspot_style"  ath="12.513" atv="9.012" visible="false"
+	    onclick="set(layer[posterbg1].visible,true);
+             set(layer[poster7-4].x,0);set(layer[poster7-4].y,0);
+             set(layer[poster7-4].visible,true);"  
+	    onover="" 
+	    onout="" />
+	<hotspot 
+		name="picture_7_4" type="image" style="xzspot_style" 
+        visible="false"
+		ath="12.513" atv="14.012" 
+		onclick="popup('model', 'https://www.ecec.carrier.com/showroom/360FR/compressor_360/360.html
+
+', 600, 600, true"
+          />
+   <!--  <hotspot name="pop_7" type="image" style="video1_style" 
+          ath="12.513" atv="19.012" visible="false"
+		 onclick="popup('video','https://www.ecec.carrier.com/showroom/video/7/7.mp4', 600, 600, true);"
+          /> -->
+
+        <!--AHU热点-->
+		<hotspot name="spot4" style="bwspot_style" ath="39.281" atv="9.977" onout="" onclick="set(layer[posterbg1].visible,true);
+            set(layer[poster7-1].x,0);set(layer[poster7-1].y,0);
+             set(layer[poster7-1].visible,true);" />
+
+		<hotspot name="spot5" style="bwspot_style" ath="52.063" atv="8.649" onout="" onclick="set(layer[posterbg1].visible,true);
+             set(layer[poster7-2].x,0);set(layer[poster7-2].y,0);
+             set(layer[poster7-2].visible,true);" />
+
+         <hotspot name="spot_9" style="bwspot_style" ath="46.528" atv="1.097"  onout="" onclick="set(layer[posterbg1].visible,true);
+             set(layer[poster7-6].x,0);set(layer[poster7-6].y,0);
+             set(layer[poster7-6].visible,true);" 
+        />
+        
+		<hotspot name="spot_10" style="bwspot_style" ath="63.492" atv="1.723"  onout="" onclick="set(layer[posterbg1].visible,true);
+             set(layer[poster7-7].x,0);set(layer[poster7-7].y,0);
+             set(layer[poster7-7].visible,true);"
+         />
+        <!--八区热点-->
+       
+		
+		<hotspot name="spot7" style="bwspot_style" ath="114.646" atv="0.345" onout="" onclick="set(layer[posterbg1].visible,true);
+             set(plugin[navigator].navigationClick,false);
+             set(layer[poster8-1].visible,true);" />
+		
+		
+	</scene>
+
+	<scene name="scene_08" title="Systèmes de contrôles" onstart="" thumburl="panos/thumb/8.jpg" lat="" lng="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/08.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/08.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,640,1280,2560" />
+		</image>
+     <hotspot name="spot0" style="dspot_style" ath="-84.874" atv="13.329"  linkedscene="scene_1" onover="" onout="" onclick="loadscene(scene_01, null, MERGE, BLEND(1));"
+	     />
+	    <hotspot name="spot_1" style="dspot_style" ath="108.186" atv="20.436"  linkedscene="scene_07" onover="" onout="" onclick="loadscene(scene_07, null, MERGE, BLEND(1));"
+	     />
+		 <hotspot name="spot_2" style="dspot_style"  ath="114.533" atv="5.920"  linkedscene="scene_5" onover="" onout="" onclick="loadscene(scene_05, null, MERGE, BLEND(1));"
+	     />
+	     <!--八区热点-->
+        
+
+		<hotspot name="spot3" style="bwspot_style" ath="-17.761" atv="1.147" scale="0.4" scale.mobile="0.6" onout="" onclick="set(layer[posterbg1].visible,true);
+             set(plugin[navigator].navigationClick,false);
+             set(layer[poster8-1].visible,true);" />
+		
+		<!--七区热点-->
+		 
+		<hotspot name="spot4" style="bwspot_style" ath="119.337" atv="-16.988" onout="" 
+			onclick="switch(hotspot[spot9].visible);
+			         switch(hotspot[picture_7_1].visible);
+			         set(hotspot[spot10].visible,false);
+			         set(hotspot[picture_7_2].visible,false);
+			         set(hotspot[spot11].visible,false);
+        	         set(hotspot[picture_7_4].visible,false)
+                     set(hotspot[pop_7].visible,false);s
+        	         ;
+			        " 
+			/>
+		<hotspot name="spot5" style="bwspot_style" ath="123.076" atv="10.500" onout="" 
+			onclick="switch(hotspot[spot10].visible);
+			         switch(hotspot[picture_7_2].visible);
+                     set(hotspot[spot9].visible,false);
+			         set(hotspot[picture_7_1].visible,false);
+			         set(hotspot[spot11].visible,false);
+        	         set(hotspot[picture_7_4].visible,false);
+        	         set(hotspot[pop_7].visible,false);
+			         " 
+			        />
+
+        <hotspot name="spot6" style="bwspot_style" ath="153.284" atv="18.757" onout="" 
+        	onclick="switch(hotspot[spot11].visible);
+        	         switch(hotspot[picture_7_4].visible);
+        	         switch(hotspot[pop_7].visible);
+                     set(hotspot[spot9].visible,false);
+			         set(hotspot[picture_7_1].visible,false);
+			         set(hotspot[spot10].visible,false);
+        	         set(hotspot[picture_7_2].visible,false);
+        	         " 
+        
+        />
+		<hotspot name="spot9" style="cpspot_style" ath="111.658" atv="-20.275" visible="false"
+	    onclick="set(layer[posterbg1].visible,true);
+             set(plugin[navigator].navigationClick,false);
+             set(layer[poster7-3].visible,true);"  
+	    onover="" 
+	    onout="" />
+	
+	<hotspot 
+		name="picture_7_1" type="image" style="xzspot_style" 
+        visible="false"
+		ath="111.658" atv="-15.275"
+		onclick="popup('model', 'https://www.ecec.carrier.com/showroom/360FR/hrv_360/360.html
+
+
+', 600, 600, true"
+          />
+		
+         <hotspot name="spot10" style="cpspot_style"  ath="115.776" atv="6.571" visible="false"
+	    onclick="set(layer[posterbg1].visible,true);
+             set(layer[poster7-5].x,0);set(layer[poster7-5].y,0);
+             set(layer[poster7-5].visible,true);"  
+	    onover="" 
+	    onout="" />
+	
+	<hotspot 
+		name="picture_7_2" type="image" style="xzspot_style" 
+        visible="false"
+		ath="115.776" atv="11.571" 
+		onclick="popup('model', 'https://www.ecec.carrier.com/showroom/360FR/black_coatedfin_360/360.html
+', 600, 600, true"
+          />
+		
+        <hotspot name="spot11" style="cpspot_style"  ath="166.197" atv="13.337" visible="false"
+	    onclick="set(layer[posterbg1].visible,true);
+             set(layer[poster7-4].x,0);set(layer[poster7-4].y,0);
+             set(layer[poster7-4].visible,true);"  
+	    onover="" 
+	    onout="" />
+	
+	<hotspot 
+		name="picture_7_4" type="image" style="xzspot_style" 
+        visible="false"
+		ath="166.197" atv="18.337" 
+		onclick="popup('model', 'https://www.ecec.carrier.com/showroom/360FR/compressor_360/360.html
+', 600, 600, true"
+          />
+   <!--  <hotspot name="pop_7" type="image" style="video1_style" 
+          ath="166.197" atv="23.337" visible="false"
+		 onclick="popup('video','https://www.ecec.carrier.com/showroom/video/7/7.mp4
+', 600, 600, true);"
+          /> -->
+		<hotspot name="spot7" style="bwspot_style" ath="-155.740" atv="17.407"  onout="" onclick="set(layer[posterbg1].visible,true);
+             set(layer[poster7-1].x,0);set(layer[poster7-1].y,0);
+             set(layer[poster7-1].visible,true);" />
+		<hotspot name="spot8" style="bwspot_style" ath="-131.775" atv="16.461" onout="" onclick="set(layer[posterbg1].visible,true);
+             set(layer[poster7-2].x,0);set(layer[poster7-2].y,0);
+             set(layer[poster7-2].visible,true);" />
+	
+		<hotspot name="spot_9" style="bwspot_style" ath="-140.129" atv="3.021"  onout="" onclick="set(layer[posterbg1].visible,true);
+             set(layer[poster7-6].x,0);set(layer[poster7-6].y,0);
+             set(layer[poster7-6].visible,true);" 
+        />
+        
+		<hotspot name="spot_10" style="bwspot_style" ath="-109.293" atv="2.688"  onout="" onclick="set(layer[posterbg1].visible,true);
+             set(layer[poster7-7].x,0);set(layer[poster7-7].y,0);
+             set(layer[poster7-7].visible,true);"
+         />
+		
+	</scene>
+
+
+</krpano>

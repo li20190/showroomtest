@@ -1,0 +1,753 @@
+<krpano>
+    <!--显示海报样式-->
+    <style name="posterstyle" type="image" keep="true"  visible="false"
+           children="true" enabled="true" bgcapture="true" align="center" x="0" y="0" zorder="11" maskchildren="true"/>
+    <!--关闭按钮样式-->
+    <style name="cms_close_style" children="false" enabled="true" url="skin/closed.png" keep="true" align="righttop"
+           width="60" height="60" zorder="100" x="10" y="10" scale="0.5" scale.mobile="0.4"/>
+    <!--海报添加透明背景-->
+    <layer name="posterbg" keep="true" type="container" preload="true" 
+	bgcolor="0x000000" bgalpha="0.9" width="100%"
+           height="100%" visible="false" children="true" enabled="true" bgcapture="true" zorder="10"
+           maskchildren="true"/>
+		   
+		   
+     <layer name="posterbg1" keep="true" type="container" preload="true" 
+	bgcolor="0x000000" bgalpha="0.9" width="100%"
+           height="100%" visible="false" children="true" enabled="true" bgcapture="true" zorder="10"
+           maskchildren="true"/>
+    <!--关闭海报icon-->
+    <layer name="closeposterbg" style="cms_close_style" parent="layer[posterbg]" onclick="closeposterbg();"/>
+	<layer name="closeposterbg1" style="cms_close_style" parent="layer[posterbg1]" onclick="closeposterbg();"/> <!--*************************左右切换*************************-->
+	 <layer name="leftArr" type="image" keep="true" visible="true" devices="desktop|mobile" parent="layer[posterbg]"
+      url="skin/left1.png" scale="0.8" align="left" x="20" y="0" zorder="100" onclick="LeftTurnPage(); "/>
+		   
+	<layer name="rightArr" type="image" keep="true" visible="true" devices="desktop|mobile" parent="layer[posterbg]"
+           url="skin/right1.png" scale="0.8" align="right" x="20" y="0" zorder="100" onclick="RightTurnPage(); "/>
+	<!-- <layer name="arrowLeft" type="image" keep="true" devices="desktop|mobile" parent="layer[posterbg]" -->
+           <!-- url="skin/left.png" scale="0.6" align="left" x="100" y="0" zorder="100" onclick=""/> -->
+		   
+    <!-- <layer name="arrowRight" type="image" keep="true" devices="desktop|mobile" parent="layer[posterbg]" -->
+           <!-- url="skin/right.png" scale="0.6" align="right" x="100" y="0" zorder="100" onclick=""/> -->
+	 <!--*************************左右切换*************************-->	   
+		   
+    <layer name="ZoomIn" type="image" keep="true" devices="desktop|mobile" parent="layer[posterbg]"
+           url="skin/zoom in.png" scale="0.4" align="bottom" x="-100" y="30" zorder="100" onclick="Zoom(); "/>
+    <layer name="ZoomOut" type="image" keep="true" devices="desktop|mobile" parent="layer[posterbg]"
+           url="skin/zoom out.png" scale="0.4" bgalpha="1.0" align="bottom" x="0" y="30" zorder="100" onloaded=""
+           onclick="zoomout()"/>
+    <layer name="Reset" type="image" keep="true" devices="desktop|mobile" parent="layer[posterbg]" url="skin/reset.png"
+           scale="0.4" align="bottom" x="100" y="30" zorder="100" onclick="Reset()"/>
+	
+    <layer name="ZoomIn1" type="image" keep="true" devices="desktop|mobile" parent="layer[posterbg1]"
+           url="skin/zoom in.png" scale="0.4" align="bottom" x="-100" y="30" zorder="100" onclick="Zoom(); "/>
+    <layer name="ZoomOut1" type="image" keep="true" devices="desktop|mobile" parent="layer[posterbg1]"
+           url="skin/zoom out.png" scale="0.4" bgalpha="1.0" align="bottom" x="0" y="30" zorder="100" onloaded=""
+           onclick="zoomout()"/>
+    <layer name="Reset1" type="image" keep="true" devices="desktop|mobile" parent="layer[posterbg1]" url="skin/reset.png"
+           scale="0.4" align="bottom" x="100" y="30" zorder="100" onclick="Reset()"/>
+
+<!--******************产品二区海报开始******************-->
+<layer name="poster2-1" 
+       type="image" 
+	   id="poster"
+       scale="0.7"
+       scale.mobile="1.0"	   
+	   style="posterstyle" 
+	   parent="layer[posterbg1]" 
+	   align="center"
+	   url="images/SD1.png"
+       onloaded="picture_resize_stage(get(name));" 
+	   onover="OnoverIszoom();"
+	   onout="OnoutIsZoom();"
+	   ondown.touch="onover();draglayer();"
+	   onup.touch="onout();"
+	   ondown.no-touch="draglayer();"
+	   />
+<layer name="poster2-2" 
+       type="image" 
+	   id="poster" 
+       scale="0.7"
+       scale.mobile="1.0"	   
+	   style="posterstyle" 
+	   parent="layer[posterbg1]" 
+	   align="center"
+	   url="images/SD0.png"
+       onloaded="picture_resize_stage(get(name));" 
+	   onover="OnoverIszoom();"
+	   onout="OnoutIsZoom();"
+	   ondown.touch="onover();draglayer();"
+	   onup.touch="onout();"
+	   ondown.no-touch="draglayer();"
+	   />
+<!-- <layer name="poster2-3"  -->
+       <!-- type="image"  -->
+	   <!-- id="poster"  -->
+       <!-- scale="0.7" -->
+       <!-- scale.mobile="1.0"	    -->
+	   <!-- style="posterstyle"  -->
+	   <!-- parent="layer[posterbg1]"  -->
+	   <!-- align="center" -->
+	   <!-- url="images/SD0.png" -->
+       <!-- onloaded="picture_resize_stage(get(name));"  -->
+	   <!-- onover="OnoverIszoom();" -->
+	   <!-- onout="OnoutIsZoom();" -->
+	   <!-- ondown.touch="onover();draglayer();" -->
+	   <!-- onup.touch="onout();" -->
+	   <!-- ondown.no-touch="draglayer();" -->
+	   <!-- /> -->
+<!--******************产品二区海报结束******************-->
+<!--******************产品三区海报开始******************-->
+<layer name="poster3-1" 
+	   type="image" 
+	   id="poster" 
+	   scale="0.7"
+       scale.mobile="1.0"
+	   style="posterstyle" 
+	   parent="layer[posterbg1]" 
+	   url="images/TD1.png"
+	   align="center"
+       onloaded="picture_resize_stage(get(name));" 
+	   onover="OnoverIszoom();"
+	   onout="OnoutIsZoom();"
+	   ondown.touch="onover();draglayer();"
+	   onup.touch="onout();"
+	   ondown.no-touch="draglayer();"
+	   />
+<layer name="poster3-2" 
+	   type="image" 
+	   id="poster"
+	   scale="0.7"
+       scale.mobile="1.0"
+	   style="posterstyle" 
+	   parent="layer[posterbg1]" 
+	   align="center"
+	   url="images/TD2.png"
+       onloaded="picture_resize_stage(get(name));" 
+	   onover="OnoverIszoom();"
+	   onout="OnoutIsZoom();"
+	   ondown.touch="onover();draglayer();"
+	   onup.touch="onout();"
+	   ondown.no-touch="draglayer();"
+	   />
+<!--******************产品三区海报结束******************-->
+<!--******************产品四区海报开始******************-->
+<layer name="poster4-1" 
+       type="image" 
+	   id="poster"
+       scale="0.7"
+       scale.mobile="1.0"	   
+	   style="posterstyle" 
+	   parent="layer[posterbg1]"
+	   align="center" 
+	   url="images/2-way.jpg" 
+	   onloaded="picture_resize_stage(get(name));" 
+	   onover="OnoverIszoom();"
+	   onout="OnoutIsZoom();"
+	   ondown.touch="onover();draglayer();"
+	   onup.touch="onout();"
+	   ondown.no-touch="draglayer();"
+	   />
+<layer name="poster4-2" 
+       type="image" 
+	   id="poster"
+       scale="0.7"
+       scale.mobile="1.0"	   
+	   style="posterstyle" 
+	   parent="layer[posterbg1]"
+	   align="center" 
+	   url="images/1-way.jpg" 
+	   onloaded="picture_resize_stage(get(name));" 
+	   onover="OnoverIszoom();"
+	   onout="OnoutIsZoom();"
+	   ondown.touch="onover();draglayer();"
+	   onup.touch="onout();"
+	   ondown.no-touch="draglayer();"
+	   />
+<layer name="poster4-3" 
+       type="image" 
+	   id="poster"
+       scale="0.7"
+       scale.mobile="1.0"	   
+	   style="posterstyle" 
+	   parent="layer[posterbg1]"
+	   align="center" 
+	   url="images/4-way.jpg"
+       onloaded="picture_resize_stage(get(name));" 
+	   onover="OnoverIszoom();"
+	   onout="OnoutIsZoom();"
+	   ondown.touch="onover();draglayer();"
+	   onup.touch="onout();"
+	   ondown.no-touch="draglayer();"/>
+<layer name="poster4-4" 
+       type="image" 
+	   id="poster" 
+	   scale="0.7"
+       scale.mobile="1.0"
+	   style="posterstyle" 
+	   parent="layer[posterbg1]"
+	   align="center" 
+	   url="images/round-way.jpg"
+       onloaded="picture_resize_stage(get(name));" 
+	   onover="OnoverIszoom();"
+	   onout="OnoutIsZoom();"
+	   ondown.touch="onover();draglayer();"
+	   onup.touch="onout();"
+	   ondown.no-touch="draglayer();"/>
+<!-- <layer name="poster4-5"  -->
+       <!-- type="image"  -->
+       <!-- id="poster" -->
+       <!-- scale="0.7" -->
+       <!-- scale.mobile="1.0"	    -->
+       <!-- style="posterstyle"  -->
+       <!-- parent="layer[posterbg1]"  -->
+       <!-- align="center" -->
+       <!-- url="images/round-way.jpg" -->
+       <!-- onloaded="picture_resize_stage(get(name));"  -->
+       <!-- onover="OnoverIszoom();" -->
+	   <!-- onout="OnoutIsZoom();" -->
+	   <!-- ondown.touch="onover();draglayer();" -->
+	   <!-- onup.touch="onout();" -->
+	   <!-- ondown.no-touch="draglayer();"/> -->
+<!--******************产品四区海报结束******************-->
+<!--******************产品五区海报开始******************-->
+<layer name="poster5-1" 
+       type="image" 
+       id="poster"
+       scale="0.7"
+       scale.mobile="1.0"	   
+       style="posterstyle" 
+       parent="layer[posterbg1]" 
+       align="center"
+       url="images/high static duct.jpg"
+       onloaded="picture_resize_stage(get(name));" 
+       onover="OnoverIszoom();"
+	   onout="OnoutIsZoom();"
+	   ondown.touch="onover();draglayer();"
+	   onup.touch="onout();"
+	   ondown.no-touch="draglayer();"/>
+<layer name="poster5-2" 
+       type="image" 
+       id="poster"
+       scale="0.7"
+       scale.mobile="1.0"	   
+       style="posterstyle" 
+       parent="layer[posterbg1]" 
+       align="center"
+       url="images/standard static duct.jpg"
+       onloaded="picture_resize_stage(get(name));" 
+       onover="OnoverIszoom();"
+	   onout="OnoutIsZoom();"
+	   ondown.touch="onover();draglayer();"
+	   onup.touch="onout();"
+	   ondown.no-touch="draglayer();"/>	   
+<layer name="poster5-3" 
+       type="image" 
+       id="poster"
+       scale="0.7"
+       scale.mobile="1.0"	   
+       style="posterstyle" 
+       parent="layer[posterbg1]" 
+       align="center"
+       url="images/slim duct.jpg"
+       onloaded="picture_resize_stage(get(name));" 
+       onover="OnoverIszoom();"
+	   onout="OnoutIsZoom();"
+	   ondown.touch="onover();draglayer();"
+	   onup.touch="onout();"
+	   ondown.no-touch="draglayer();"/>
+<layer name="poster5-4" 
+       type="image" 
+       id="poster"
+       scale="0.7"
+       scale.mobile="1.0"	   
+       style="posterstyle" 
+       parent="layer[posterbg1]" 
+       align="center"
+       url="images/Medium static duct.jpg"
+       onloaded="picture_resize_stage(get(name));" 
+       onover="OnoverIszoom();"
+	   onout="OnoutIsZoom();"
+	   ondown.touch="onover();draglayer();"
+	   onup.touch="onout();"
+	   ondown.no-touch="draglayer();"/>
+<!--******************产品五区海报结束********************-->
+<!--******************产品六区海报开始******************-->
+<layer name="poster6-1" 
+       type="image" 
+       id="poster"
+       scale="0.7"
+       scale.mobile="1.0"	   
+       style="posterstyle" 
+       parent="layer[posterbg1]" 
+       align="center"
+       url="images/HIGH WALL.jpg"
+       onloaded="picture_resize_stage(get(name));" 
+       onover="OnoverIszoom();"
+	   onout="OnoutIsZoom();"
+	   ondown.touch="onover();draglayer();"
+	   onup.touch="onout();"
+	   ondown.no-touch="draglayer();"/>
+<layer name="poster6-2" 
+       type="image" 
+       id="poster"
+       scale="0.7"
+       scale.mobile="1.0"	   
+       style="posterstyle" 
+       parent="layer[posterbg1]" 
+       align="center"
+       url="images/HIGH WALL.jpg"
+       onloaded="picture_resize_stage(get(name));" 
+       onover="OnoverIszoom();"
+	   onout="OnoutIsZoom();"
+	   ondown.touch="onover();draglayer();"
+	   onup.touch="onout();"
+	   ondown.no-touch="draglayer();"/>	   
+<layer name="poster6-3" 
+       type="image" 
+       id="poster"
+       scale="0.7"
+       scale.mobile="1.0"	   
+       style="posterstyle" 
+       parent="layer[posterbg1]"
+       align="center" 
+       url="images/2-way console.jpg"
+       onloaded="picture_resize_stage(get(name));" 
+       onover="OnoverIszoom();"
+	   onout="OnoutIsZoom();"
+	   ondown.touch="onover();draglayer();"
+	   onup.touch="onout();"
+	   ondown.no-touch="draglayer();"/>
+<layer name="poster6-4" 
+       type="image" 
+       id="poster"
+       scale="0.7"
+       scale.mobile="1.0"	   
+       style="posterstyle" 
+       parent="layer[posterbg1]" 
+       align="center"
+       url="images/Console Recessed.jpg"
+       onloaded="picture_resize_stage(get(name));" 
+       onover="OnoverIszoom();"
+	   onout="OnoutIsZoom();"
+	   ondown.touch="onover();draglayer();"
+	   onup.touch="onout();"
+	   ondown.no-touch="draglayer();"/>
+<layer name="poster6-5" 
+       type="image" 
+       id="poster"
+       scale="0.7"
+       scale.mobile="1.0"	   
+       style="posterstyle" 
+       parent="layer[posterbg1]" 
+       align="center"
+       url="images/Flec AC.jpg"
+       onloaded="picture_resize_stage(get(name));" 
+       onover="OnoverIszoom();"
+	   onout="OnoutIsZoom();"
+	   ondown.touch="onover();draglayer();"
+	   onup.touch="onout();"
+	   ondown.no-touch="draglayer();"/>
+<layer name="poster6-6" 
+       type="image" 
+       id="poster"
+       scale="0.7"
+       scale.mobile="1.0"	   
+       style="posterstyle" 
+       parent="layer[posterbg1]"
+       align="center"
+       url="images/Flec DC.jpg"
+       onloaded="picture_resize_stage(get(name));" 
+       onover="OnoverIszoom();"
+	   onout="OnoutIsZoom();"
+	   ondown.touch="onover();draglayer();"
+	   onup.touch="onout();"
+	   ondown.no-touch="draglayer();"/>
+<!-- <layer name="poster6-7"  -->
+       <!-- type="image"  -->
+       <!-- id="poster" -->
+       <!-- scale="0.7" -->
+       <!-- scale.mobile="1.0"	    -->
+       <!-- style="posterstyle"  -->
+       <!-- parent="layer[posterbg1]" -->
+       <!-- align="center" -->
+       <!-- url="images/Out.jpg" -->
+       <!-- onloaded="picture_resize_stage(get(name));"  -->
+       <!-- onover="OnoverIszoom();" -->
+	   <!-- onout="OnoutIsZoom();" -->
+	   <!-- ondown.touch="onover();draglayer();" -->
+	   <!-- onup.touch="onout();" -->
+	   <!-- ondown.no-touch="draglayer();"/> -->
+<!--******************产品六区海报结束********************-->
+<!--******************产品七区海报开始******************-->
+<layer name="poster7-1" 
+       type="image" 
+       id="poster"
+       scale="0.7"
+       scale.mobile="1.0"	   
+       style="posterstyle" 
+       parent="layer[posterbg1]" 
+       align="center"
+       url="images/1 AHU Kit (TA).png"
+       onloaded="picture_resize_stage(get(name));" 
+       onover="OnoverIszoom();"
+	   onout="OnoutIsZoom();"
+	   ondown.touch="onover();draglayer();"
+	   onup.touch="onout();"
+	   ondown.no-touch="draglayer();"/>
+<layer name="poster7-2" 
+       type="image" 
+       id="poster"
+       scale="0.7"
+       scale.mobile="1.0"	   
+       style="posterstyle" 
+       parent="layer[posterbg1]" 
+       align="center"
+       url="images/2 AHU Kit (DDC).png"
+       onloaded="picture_resize_stage(get(name));" 
+       onover="OnoverIszoom();"
+	   onout="OnoutIsZoom();"
+	   ondown.touch="onover();draglayer();"
+	   onup.touch="onout();"
+	   ondown.no-touch="draglayer();"/>	   
+<layer name="poster7-3" 
+       type="image" 
+       id="poster"
+       scale="0.7"
+       scale.mobile="1.0"	   
+       style="posterstyle" 
+       parent="layer[posterbg1]" 
+       align="center"
+       url="images/HRV.jpg"
+       onloaded="picture_resize_stage(get(name));" 
+       onover="OnoverIszoom();"
+	   onout="OnoutIsZoom();"
+	   ondown.touch="onover();draglayer();"
+	   onup.touch="onout();"
+	   ondown.no-touch="draglayer();"/>
+<layer name="poster7-4" 
+       type="image" 
+       id="poster"
+       scale="0.7"
+       scale.mobile="1.0"	   
+       style="posterstyle" 
+       parent="layer[posterbg1]" 
+       align="center"
+       url="images/Compressor.png"
+       onloaded="picture_resize_stage(get(name));" 
+       onover="OnoverIszoom();"
+	   onout="OnoutIsZoom();"
+	   ondown.touch="onover();draglayer();"
+	   onup.touch="onout();"
+	   ondown.no-touch="draglayer();"/>
+<layer name="poster7-5" 
+       type="image" 
+       id="poster"
+       scale="0.7"
+       scale.mobile="1.0"	   
+       style="posterstyle" 
+       parent="layer[posterbg1]"
+       align="center" 
+       url="images/12.jpg"
+       onloaded="picture_resize_stage(get(name));" 
+       onover="OnoverIszoom();"
+	   onout="OnoutIsZoom();"
+	   ondown.touch="onover();draglayer();"
+	   onup.touch="onout();"
+	   ondown.no-touch="draglayer();"/>
+<!--******************新增两点开始************************-->
+<layer name="poster7-6" 
+       type="image" 
+       id="poster"
+       scale="0.7"
+       scale.mobile="1.0"	   
+       style="posterstyle" 
+       parent="layer[posterbg1]"
+       align="center" 
+       url="images/AHU-1.jpg"
+       onloaded="picture_resize_stage(get(name));" 
+       onover="OnoverIszoom();"
+	   onout="OnoutIsZoom();"
+	   ondown.touch="onover();draglayer();"
+	   onup.touch="onout();"
+	   ondown.no-touch="draglayer();"/>
+<layer name="poster7-7" 
+       type="image" 
+       id="poster"
+       scale="0.7"
+       scale.mobile="1.0"	   
+       style="posterstyle" 
+       parent="layer[posterbg1]"
+       align="center" 
+       url="images/AHU-2.jpg"
+       onloaded="picture_resize_stage(get(name));" 
+       onover="OnoverIszoom();"
+	   onout="OnoutIsZoom();"
+	   ondown.touch="onover();draglayer();"
+	   onup.touch="onout();"
+	   ondown.no-touch="draglayer();"/>
+<!--******************新增两点结束************************-->
+<!--******************产品七区海报结束********************-->
+<!--******************产品八区海报开始********************-->
+<layer name="poster8-1" 
+       type="image" 
+       id="poster"
+       scale="0.7"
+       scale.mobile="1.0"	   
+       style="posterstyle" 
+       parent="layer[posterbg1]"
+       align="center" 
+       url="images/controller.jpg"
+       onloaded="picture_resize_stage(get(name));" 
+       onover="OnoverIszoom();"
+	   onout="OnoutIsZoom();"
+	   ondown.touch="onover();draglayer();"
+	   onup.touch="onout();"
+	   ondown.no-touch="draglayer();"/>
+
+<!--******************产品八区海报结束********************-->	  	   
+
+    <!--关闭海报方法-->
+     <action name="closeposterbg"> 
+        set(layer[posterbg].visible,false);
+		set(layer[posterbg1].visible,false);
+        set(control.usercontrol, all);
+        for(set(i,1),i LT layer.count,inc(i), 
+          if(layer[get(i)].id == "poster",
+              set(layer[get(i)].visible,false);
+			  set(layer[get(i)].x,0);
+			  set(layer[get(i)].y,0);
+			  );  
+			 );
+			  
+			  if(device.mobile,
+			  for(set(i,1),i LT layer.count,inc(i),
+              if(layer[get(i)].id == "poster",
+               set(layer[get(i)].visible,false);
+			  );
+            ); 
+        );
+       
+       Reset();
+	   
+       MReset();
+    </action> 
+	<!--左箭头方法-->
+	<action name="LeftTurnPage">
+		if(get(CurIndex) GT 0,
+			js(getCurItem(get(CurIndex)));
+			set(layer[get(curLayerName)].visible,false);
+			dec(CurIndex,1);
+			js(getCurItem(get(CurIndex)));
+			set(layer[get(curLayerName)].visible,true);
+			set(layer[get(curLayerName)].x,0);
+			set(layer[get(curLayerName)].y,0);
+			<!--左右箭头的显示和隐藏-->
+			if(get(CurIndex) LE 0 ,
+			set(layer[leftArr].visible,false);
+			);
+			set(layer[rightArr].visible,true);
+		);
+		
+			
+	</action>
+	<!--右箭头方法-->
+	<action name="RightTurnPage">
+		set(tempTotalCount,get(TotalCount));
+		dec(tempTotalCount,1);
+		if(get(CurIndex) LT tempTotalCount,
+			js(getCurItem(get(CurIndex)));
+			set(layer[get(curLayerName)].visible,false);
+			inc(CurIndex,1);
+			js(getCurItem(get(CurIndex)));
+			set(layer[get(curLayerName)].visible,true);
+			set(layer[get(curLayerName)].x,0);
+			set(layer[get(curLayerName)].y,0);
+			<!--左右箭头的显示和隐藏-->
+			if(get(CurIndex) GE tempTotalCount,
+			set(layer[rightArr].visible,false);
+			);
+			set(layer[leftArr].visible,true);
+		);
+		
+	</action>
+	<!--
+	1.加载箭头时候判断当前箭头图片索引是否是第一张   如果是 则只显示右箭头  
+	当加载到第二张的时候再次显示左箭头
+    -->
+    <!-- 
+    2.如果当前显示的是最后一张 则隐藏右箭头  
+    -->
+	 <action name="showarrows">
+        if(get(CurIndex) LE 0,
+		     <!-- set(CurIndex,0); -->
+			 set(layer[leftArr].visible,false); 
+			 set(layer[rightArr].visible,true);		 
+		     ); 
+		if(get(CurIndex) GT 0,
+			 set(layer[leftArr].visible,true); 
+			 set(layer[rightArr].visible,true);		 
+			 ); 	 
+	    if(get(CurIndex) GE get(TotalCount)-1, 
+			 set(layer[rightArr].visible,false);
+			 set(layer[leftArr].visible,true);
+	         );  
+			  	 
+	    
+	
+		
+	</action> 
+	
+	<!--放大海报方法-->
+    <action name="Zoom">
+		 for(set(i,1),i LT layer.count,inc(i),
+		 add(scale,get(layer[get(i)].scale), 0.1);
+         roundval(scale,1.0);
+         if(get(scale) LT 5.0,
+          if(layer[get(i)].id == "poster",
+              set(layer[get(i)].scale,get(scale));
+			
+       );
+		
+	);
+);
+        set(layer[ZoomIn].scale,0.4);
+        set(layer[ZoomIn1].scale,0.4);
+
+    </action>
+	<!--缩小海报方法-->
+    <action name="ZoomOut">  
+     for(set(i,1),i LT layer.count,inc(i),
+	   sub(scale,get(layer[get(i)].scale), 0.1);
+       roundval(scale,1.0);
+	    if(layer[get(i)].id == "poster",
+          if(get(scale) GE 0.4,
+         
+              set(layer[get(i)].scale,get(scale));
+            );
+			
+        );
+	);  
+set(layer[ZoomOut].scale,0.4);
+set(layer[ZoomOut1].scale,0.4);		
+    </action>
+	<!--重置海报方法-->
+    <action name="Reset">
+         for(set(i,1),i LT layer.count,inc(i),
+		   txtadd(layername, 'poster', get(i));
+           if(layer[get(i)].id == "poster",
+              set(layer[get(i)].scale,0.7);
+              	  
+		   );	
+        ); 
+		if(device.mobile,
+		for(set(i,1),i LT layer.count,inc(i),
+          if(layer[get(i)].id == "poster",
+              set(layer[get(i)].scale,1.0);
+		   );	
+		);
+		set(layer[ZoomOut].scale,0.4);
+	    set(layer[ZoomOut1].scale,0.4);
+	          
+           
+    </action>
+
+     <action name="MReset" devices="mobile">
+         for(set(i,1),i LT layer.count,inc(i),
+		   txtadd(layername, 'poster', get(i));
+           if(layer[get(i)].id == "poster",
+              set(layer[get(i)].scale,1.0);
+              	  
+		   );	
+        );		
+		set(layer[ZoomOut].scale,0.4);
+	    set(layer[ZoomOut1].scale,0.4);  
+           
+    </action>
+    <!--海报适配屏幕方法-->
+    <action name="picture_resize_stage">
+     div(aspect, layer[%1].imagewidth, layer[%1].imageheight);
+     mul(new_width, stagewidth, 0.9);
+     div(new_height, new_width, aspect); 
+     mul(max_height, stageheight,0.9);
+     if(new_height GT max_height,
+     copy(new_height, max_height);
+     mul(new_width, new_height, aspect);
+     );
+     roundval(new_width);
+     roundval(new_height);
+     copy(layer[%1].width, new_width);
+     copy(layer[%1].height, new_height);
+    	
+    </action>
+	
+	<!--鼠标滚轮事件-->
+	<events name="image_zoom_events"  onmousewheel="image_onmousewheel();" />
+
+
+	<action name="image_onmousewheel">
+	     for(set(i,1),i LT layer.count,inc(i), 
+           if(layer[get(i)].id == "poster",
+		      if(iszoom,
+			   if(wheeldelta_touchscale GT 0,
+				<!--手势缩放-->
+				if(startzoom,
+				set(startzoom,false);
+					copy(start_wheeldelta_touchscale,
+					wheeldelta_touchscale);
+					copy(start_imagescale, 
+					layer[get(i)].scale);
+				  );
+				div(tmp, wheeldelta_touchscale, 
+				start_wheeldelta_touchscale);
+				mul(layer[get(i)].scale, 
+                start_imagescale, tmp);
+			  ,
+				<!--鼠标滚轮缩放-->
+				mul(sit,get(wheeldelta),0.05);
+				mul(sit,layer[get(i)].scale);
+				add(layer[get(i)].scale,sit);
+			  );
+			  );
+			  );
+		);
+		);
+		);
+	</action>
+	
+	<action name="OnoverIszoom">
+	set(iszoom, true);
+			set(startzoom, true);
+			copy(copy_mousefovchange, 
+			control.mousefovchange);
+			copy(copy_touchzoom, control.touchzoom);
+			set(control.mousefovchange, 0);
+			set(control.touchzoom, false);
+	</action>
+	
+    <action name="OnoutIsZoom">
+	set(iszoom, false);
+			copy(control.mousefovchange, copy_mousefovchange);
+			copy(control.touchzoom, copy_touchzoom);
+	</action>
+	<action name="draglayer">
+	copy(drag_currentx, x);
+	copy(drag_currenty, y);
+	
+	copy(drag_stagex, mouse.stagex);
+	copy(drag_stagey, mouse.stagey);
+	
+	indexoftxt(align_contains_right, get(align), 'right');
+	indexoftxt(align_contains_bottom, get(align), 'bottom');
+	calc(drag_align_x, align_contains_right GE 0 ? -1 : +1);
+	calc(drag_align_y, align_contains_bottom GE 0 ? -1 : +1);
+	
+	asyncloop(pressed,
+		calc(x, drag_currentx + (mouse.stagex - drag_stagex)*drag_align_x);
+		calc(y, drag_currenty + (mouse.stagey - drag_stagey)*drag_align_y);
+	  );
+	
+   </action>
+   
+   
+</krpano>

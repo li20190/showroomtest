@@ -1,0 +1,75 @@
+@font-face{
+    font-family: 'FlamaBold';
+    src: url('../../fonts/Flama-Bold.eot');
+    src: url('../../fonts/Flama-Bold.woff ') format('woff');
+}
+@font-face{
+    font-family: 'FlamaBoldItalic';
+    src: url('../../fonts/Flama-BoldItalic.eot');
+    src: url('../../fonts/Flama-BoldItalic.woff ') format('woff');
+}
+@font-face{
+    font-family: 'FlamaBasicItalic';
+    src: url('../../fonts/Flama-BasicItalic.eot');
+    src: url('../../fonts/Flama-BasicItalic.woff ') format('woff');
+}
+@font-face{
+    font-family: 'FlamaBasic';
+    src: url('../../fonts/Flama-Basic.eot');
+    src: url('../../fonts/Flama-Basic.woff ') format('woff');
+}
+#textModal {
+    z-index: 9999;
+    background:none;
+    position:relative;
+    width: 100%;
+}
+#textModal .textModal-content {
+    background: none rgba(255, 255, 255, 0.6);
+    width: 260px;
+    height: 300px;
+    position: absolute;
+    bottom:70px;
+    right:5%;
+    color:#000000;
+    padding:10px;
+    overflow: hidden;
+}
+#textModal .contents {
+    position:absolute;
+    top:80px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    height: 200px;
+    margin: 10px 15px 10px 15px;
+    font-size: 12px;
+	
+}
+#textModal .logo {
+    position: fixed;
+}
+#textModal .logo img {
+    width: 80px;
+    margin:8px;
+}
+::-webkit-scrollbar{width:0;}
+#textModal .item {
+	
+    margin-bottom: 20px;
+    font-family: 'FlamaBasic';
+}
+#textModal .item h1 {
+    font-family: 'FlamaBold';
+    font-size: 14px;
+}
+#textModal .item h5 {
+    font-family: 'FlamaBold';
+    font-size: 12px;
+    display: inline-block;
+}
+#textModal .close {
+    color: #000;
+    opacity: 1;
+    margin-top: 5px;
+    font-weight: normal;
+}

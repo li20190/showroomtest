@@ -1,0 +1,52 @@
+<krpano version="1.2.0"  info="山毛毛制作">
+<include url="thumb.xml"/> 
+<!--右下角功能样式-->
+<style name="cms_skin_rightbottom"  keep="true" zorder="1" align="rightbottom" x="10" y="20" scale="0.7"/>
+<!--左下角功能样式-->
+<style name="cms_skin_leftbottom"  keep="true" zorder="1" align="leftbottom" x="10" y="20" scale="0.7"/>
+	<!--文本样式-->
+<style name="cms_text" url="https://bama-bucket.oss-cn-hangzhou.aliyuncs.com/vr/public/plugins/textfield.swf" align="bottom" x="25"  oy="20" keep="true" backgroundcolor="0xffffff" backgroundalpha="0.0" roundedge="0" css="font-family:黑体；font-size:15px;color:#ffffff;" width="100" autoheight=""/>
+<!--文本样式1  右下角样式文本样式-->
+<style name="cms_text1" url="https://bama-bucket.oss-cn-hangzhou.aliyuncs.com/vr/public/plugins/textfield.swf" align="bottom" x="17" oy="20" keep="true" backgroundcolor="0xffffff" backgroundalpha="0.0" roundedge="0" css="font-family:黑体；font-size:15px;color:#ffffff;" width="100" autoheight=""/>
+
+<!--PC端垂直显示比例  垂直间距10像素-->
+<!--home-->
+<layer name="cms_home"  style="cms_skin_leftbottom" url="skin/btn_home.png" x="10" x.mobile="10" onclick="openurl('https://www.ecec.carrier.com/#/')"/>
+<!--scene-->
+<layer name="cms_scene" style="cms_skin_leftbottom" url="skin/btn_scene.png" x="70" x.mobile="70" onclick="skin_showthumbs();set(layer[textfield].visible,false);"/>
+<!--info-->
+<layer name="cms_info"  style="cms_skin_leftbottom" url="skin/btn_info.png" x="130" x.mobile="130" onclick="czznshow();"/>
+<!--GO and  BUY-->
+<layer name="cms_skin_Go" style="cms_skin_rightbottom" url="skin/btn_contact.png" x="20" x.mobile="20" onclick="js(showtextfield();)" onloaded="set(showtext, true);"/>
+<!-- <layer name="cms_skin_Go_html" style="cms_text1" parent="cms_skin_Go" html="Go and Buy"/> -->
+<action name="showtextfield">
+jscall(textModal.style.display="block");
+jscall(pano.style.display="none");
+</action>
+
+<action name="czznshow">
+set(layer[info].visible,true);
+set(layer[info].alpha,1.0);
+</action>
+<action name="czznclose">
+set(layer[info].visible,false);
+set(layer[info].alpha,0.0);
+</action>
+
+<action name="picture_resize">
+     div(aspect, layer[%1].imagewidth, layer[%1].imageheight);
+     mul(new_width, stagewidth, 0.8);
+     div(new_height, new_width, aspect); 
+     mul(max_height, stageheight,0.8);
+     if(new_height GT max_height,
+     copy(new_height, max_height);
+     mul(new_width, new_height, aspect);
+     );
+     roundval(new_width);
+     roundval(new_height);
+     copy(layer[%1].width, new_width);
+     copy(layer[%1].height, new_height);
+    	
+    </action>
+
+</krpano>
